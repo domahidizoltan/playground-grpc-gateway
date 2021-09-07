@@ -23,7 +23,9 @@ func main() {
 	service := &car.CarService{}
 	pb.RegisterCarServiceServer(server, service)
 
-	log.Printf("grpc server listening on 0.0.0.0:%d", grpcPort)
-	log.Fatal(server.Serve(lis)) 
+	withGateway(func() {
+		log.Printf("grpc server listening on 0.0.0.0:%d", grpcPort)
+		log.Fatal(server.Serve(lis)) 
+	})
 
 }
