@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package car;
+option go_package = "github.com/domahidizoltan/playground-grpc-gateway/generated/car;car";
+
+message Car {
+    string brand = 1;
+    string model = 2;
+    int32 year = 3;
+}
+
+message CarEcho {
+    Car car = 1;
+    int64 timestamp = 2;
+}
+
+service CarService {
+    rpc EchoCar(Car) returns (CarEcho);
+    rpc EchoCars(stream Car) returns (stream CarEcho);
+}
